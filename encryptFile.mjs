@@ -9,7 +9,8 @@ async function encryptFile() {
     const publicKey = await openpgp.readKey({ armoredKey: publicKeyArmored });
 
     // Membaca data file ke dalam buffer
-    const fileData = await fsp.readFile("./file/username.csv");
+    // const fileData = await fsp.readFile("./file/username.csv");
+    const fileData = await fsp.readFile("./file/username.pdf");
 
     // Membuat pesan dari data file
     const message = await openpgp.createMessage({ binary: fileData });
@@ -22,7 +23,8 @@ async function encryptFile() {
     });
 
     // Menyimpan file terenkripsi
-    await fsp.writeFile("./file/username_encyrpted.csv.pgp", encrypted);
+    // await fsp.writeFile("./file/username_encyrpted.csv.pgp", encrypted);
+    await fsp.writeFile("./file/username_encyrpted.pdf.pgp", encrypted);
     console.log("File encrypted successfully.");
   } catch (error) {
     console.error("Error encrypting file:", error);
