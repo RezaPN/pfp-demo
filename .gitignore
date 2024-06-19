@@ -1,0 +1,30 @@
+# Mengabaikan folder node_modules
+node_modules/
+
+# Mengabaikan semua file dalam folder secure_keys
+secure_keys/
+
+# Mengabaikan file log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Mengabaikan file lingkungan pengembangan
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Mengabaikan direktori kesalahan IDE
+.idea/
+.vscode/
+*.swp
+
+# Mengabaikan file build
+dist/
+build/
+
+# Mengabaikan file temporary
+*.tmp
+*.temp

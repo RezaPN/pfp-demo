@@ -1,0 +1,17 @@
+{
+  "name": "pfp-example",
+  "version": "1.0.0",
+  "description": "demo of pfp library for generate key, encrypt and decrypt implementation",
+  "main": "index.js",
+  "scripts": {
+    "generate-key": "node generateKey.mjs",
+    "encrypt-file": "node encryptFile.mjs",
+    "decrypt-file": "node decryptFile.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "openpgp": "^5.11.1"
+  }
+}
