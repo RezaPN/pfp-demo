@@ -23,8 +23,10 @@ async function decryptFile() {
     // Membaca kunci privat dari file
     const privateKeyArmored = await fsp.readFile("./secure_keys/private.key", "utf8");
 
-    // Membaca data terenkripsi dari file
-    const encryptedData = await fsp.readFile("./file/username_encrypted.csv.pgp");
+    // Membaca data terenkripsi dari file sebagai string ASCII-armored
+    const encryptedData = await fsp.readFile("./file/username_encrypted.csv.asc", "utf8");
+
+    console.log(encryptedData)
 
     // Mendekripsi kunci privat menggunakan passphrase
     const privateKey = await openpgp.decryptKey({
@@ -32,18 +34,14 @@ async function decryptFile() {
       passphrase: passphrase,
     });
 
-    // Membaca pesan terenkripsi
-    const message = await openpgp.readMessage({ binaryMessage: encryptedData });
-
     // Mendekripsi pesan
     const decrypted = await openpgp.decrypt({
-      message,
+      message: await openpgp.readMessage({ armoredMessage: encryptedData }),
       decryptionKeys: privateKey,
-      format: 'binary',
     });
 
     // Menyimpan data yang telah didekripsi ke file
-    await fsp.writeFile("./file/username_decrypted.csv", Buffer.from(decrypted.data));
+    await fsp.writeFile("./file/username_decrypted.csv", decrypted.data);
     console.log("File decrypted successfully.");
   } catch (error) {
     console.error("Error decrypting file:", error);

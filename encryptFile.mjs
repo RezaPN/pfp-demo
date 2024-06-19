@@ -18,11 +18,13 @@ async function encryptFile() {
     const encrypted = await openpgp.encrypt({
       message,
       encryptionKeys: publicKey,
-      format: "binary",
+      format: "armored",
     });
 
-    // Menyimpan file terenkripsi
-    await fsp.writeFile("./file/username_encyrpted.csv.pgp", encrypted);
+    console.log(encrypted)
+
+    // Menyimpan file terenkripsi dengan ekstensi .asc
+    await fsp.writeFile("./file/username_encrypted.csv.asc", encrypted);
     console.log("File encrypted successfully.");
   } catch (error) {
     console.error("Error encrypting file:", error);
